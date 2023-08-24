@@ -13,24 +13,25 @@ public:
 		size_ = size;
 		arr = new int[size_];
 	}
-	smart_array& operator = (smart_array& copy)
-	{
-		if (&copy != this)
-		{
-			arr = copy.arr;
-		}
-		return *this;
-	}
-	smart_array(smart_array& copy)
-	{
-		arr = new int[copy.size_];
+	smart_array& operator = (const smart_array& copy)
+	{			
 		for (int i = 0; i < copy.size_; i++)
 		{
 			arr[i] = copy.arr[i];
 		}
-		size_ = copy.size_;
+		return *this;
 	}
-	
+	smart_array(const smart_array& copy)
+	{		
+		size_ = copy.size_;	
+		element = copy.element;
+		delete[] arr;
+		arr = new int[copy.size_];		
+		for (int i = 0; i < copy.size_; i++)
+		{
+			arr[i] = copy.arr[i];
+		}				
+	}	
 	void add_element(int num)
 	{
 		if (element < size_)
@@ -69,7 +70,6 @@ int main()
 		smart_array new_array(2);
 		new_array.add_element(44);
 		new_array.add_element(34);
-
 		arr = new_array;
 		std::cout << arr.get_element(1) << std::endl;
 	}
