@@ -26,11 +26,7 @@ public:
 		size_ = copy.size_;	
 		element = copy.element;
 		delete[] arr;
-		arr = new int[copy.size_];		
-		for (int i = 0; i < copy.size_; i++)
-		{
-			arr[i] = copy.arr[i];
-		}				
+		arr = new int[copy.size_];							
 	}	
 	void add_element(int num)
 	{
@@ -39,13 +35,13 @@ public:
 			arr[element] = num;
 			element += 1;
 		}
-		else (throw std::exception("Количество элементов больше количества элементов в массиве."));
+		else (throw std::runtime_error("Количество элементов больше количества элементов в массиве."));
 	}
 	int get_element(int index)
 	{
 		if (index >= size_ || index < 0)
 		{
-			throw std::exception("Некорректно указан индекс массива.");
+			throw std::runtime_error("Некорректно указан индекс массива.");
 		}
 		return arr[index];
 	}
