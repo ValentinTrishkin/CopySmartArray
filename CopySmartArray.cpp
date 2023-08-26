@@ -14,10 +14,37 @@ public:
 		arr = new int[size_];
 	}
 	smart_array& operator = (const smart_array& copy)
-	{			
-		for (int i = 0; i < copy.size_; i++)
+	{
+		if(this != &copy)
 		{
-			arr[i] = copy.arr[i];
+			element = copy.element;
+			if (size_ < copy.size_)
+			{
+				delete[] arr;
+				size_ = copy.size_;
+				arr = new int[copy.size_];
+				for (int i = 0; i < copy.size_; i++)
+				{
+					arr[i] = copy.arr[i];
+				}
+			}
+			else if (size_ < copy.size_)
+			{
+				delete[] arr;
+				size_ = copy.size_;
+				arr = new int[copy.size_];
+				for (int i = 0; i < copy.size_; i++)
+				{
+					arr[i] = copy.arr[i];
+				}
+			}
+			else
+			{
+				for (int i = 0; i < copy.size_; i++)
+				{
+					arr[i] = copy.arr[i];
+				}
+			}			
 		}
 		return *this;
 	}
@@ -25,8 +52,11 @@ public:
 	{		
 		size_ = copy.size_;	
 		element = copy.element;
-		delete[] arr;
-		arr = new int[copy.size_];							
+		arr = new int[copy.size_];
+		for (int i = 0; i < copy.size_; i++)
+		{
+			arr[i] = copy.arr[i];
+		}
 	}	
 	void add_element(int num)
 	{
